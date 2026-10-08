@@ -1,0 +1,44 @@
+name: Refresh profile art
+
+# Rebuilds the live stats spec sheet and the contribution snake,
+# then publishes both to the `output` branch that README.md links to.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches-ignore: [output]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-art
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render stats spec sheet
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/gen_stats.py "${{ github.repository_owner }}" dist/stats.svg
+
+      - name: Render contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg?color_snake=#ffb703&color_dots=#0e2f55,#164a7a,#2a78b8,#5ee7ff,#cfe8ff&color_dot_border=#06203f
+
+      - name: Publish to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          keep_history: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

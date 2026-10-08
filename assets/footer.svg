@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 90" width="1200" height="90" role="img" aria-label="End of drawing">
+  <style>
+    text { font-family: 'JetBrains Mono','Fira Code','SFMono-Regular',Consolas,'Liberation Mono',monospace; fill: #cfe8ff; font-size: 13px; letter-spacing: 4px; }
+    .run { stroke-dasharray: 18 10; animation: run 1.2s linear infinite; }
+    @keyframes run { to { stroke-dashoffset: -28; } }
+  </style>
+  <rect width="1200" height="90" rx="10" fill="#06203f"/>
+  <line x1="40" y1="45" x2="1160" y2="45" stroke="#5ee7ff" stroke-opacity=".5" stroke-width="2" class="run"/>
+  <rect x="370.0" y="30" width="460" height="30" fill="#06203f"/>
+  <text x="600.0" y="50" text-anchor="middle">END OF DRAWING · SK-0001 · <tspan fill="#ffb703">KEEP BUILDING</tspan></text>
+  <path d="M40 30 v30 M1160 30 v30" stroke="#cfe8ff" stroke-width="2"/>
+</svg>
